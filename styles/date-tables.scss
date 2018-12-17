@@ -1,0 +1,90 @@
+.date-tables {
+  .date-tables__panel {
+    float: left;
+    position: relative;
+    min-width: 224px;
+    width: 50%;
+    margin: 0;
+    padding: 16px;
+    box-sizing: border-box;
+
+    &.is-right {
+      .date-tables__panel__header {
+        button {
+          float: right;
+        }
+
+        div {
+          margin-left: 50px;
+          margin-right: 50px;
+        }
+      }
+    }
+
+    &.is-left {
+      border: 0;
+
+      @media #{$small-only} {
+        border-bottom: $border-default;
+      }
+    }
+
+    .date-tables__panel__header {
+      position: relative;
+      text-align: center;
+      height: 28px;
+
+      button {
+        margin-left: 6px;
+        float: left;
+
+        @media #{$small-only} {
+          padding: 8px;
+          margin-left: 0;
+          position: relative;
+          left: -4px;
+          top: -6px;
+        }
+      }
+
+      div {
+        font-size: 14px;
+        margin-right: 50px;
+      }
+
+      .date-tables__icon-btn {
+        font-size: 12px;
+        color: rgb(151, 168, 190);
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        outline: none;
+        margin-top: 3px;
+
+        &:hover {
+          color: #20a0ff;
+        }
+
+        &.el-icon-d-arrow-left,
+        &.el-icon-d-arrow-right,
+        &.el-icon-arrow-left,
+        &.el-icon-arrow-right {
+          &:before {
+            font-size: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$small-only} {
+    .date-tables__panel {
+      width: 100%;
+
+      &.is-left {
+        border-bottom: $border-default;
+        border-right: $none-value;
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+.date-table {
+  table-layout: fixed;
+  width: 100%;
+  font-size: 12px;
+  min-width: 224px;
+  user-select: none;
+
+  th {
+    padding: 5px;
+    text-align: center;
+    color: rgb(131, 145, 165);
+    font-weight: 500;
+  }
+
+  td {
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+
+    &.next-month,
+    &.prev-month {
+      color: #ddd;
+    }
+
+    &.available:hover {
+      background-color: rgb(228, 232, 241);
+    }
+
+    &.in-range {
+      background-color: rgb(210, 236, 255);
+
+      &:hover {
+        background-color: rgb(175, 221, 255);
+      }
+    }
+
+    &.today {
+      position: relative;
+      color: #20a0ff;
+
+      &:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 0.5em solid #20a0ff;
+        border-left: .5em solid transparent;
+      }
+    }
+
+    &.current:not(.disabled),
+    &.start-date,
+    &.end-date {
+      background-color: #20a0ff !important;
+      color: #fff;
+    }
+
+    &.disabled {
+      background-color: $table-bg-accent;
+      opacity: 1;
+      color: #ccc;
+    }
+  }
+}

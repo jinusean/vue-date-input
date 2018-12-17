@@ -1,0 +1,81 @@
+.date-picker {
+  height: 30px;
+
+  input.el-input__inner {
+    width: inherit;
+    height: inherit;
+    margin: 0;
+  }
+
+  .icon-calendar {
+    display: inline-block;
+    position: absolute;
+    top: 6px;
+    left: 3px;
+    width: 15px;
+    height: 15px;
+    color: rgba($brand-text-color, 0.5);
+    cursor: pointer;
+    background-image: url("~assets/img/calendar-icon.svg");
+  }
+
+  // Not used?
+  .date-picker-mobile {
+    &:before {
+      background: $brand-white-color;
+      width: 99%;
+      height: 2px;
+      content: "";
+      display: inline-block;
+      position: absolute;
+      bottom: 1px;
+      z-index: 9999;
+      right: 1px;
+      @media #{$small-only} {
+        background: transparent;
+      }
+    }
+
+    @media #{$small-only} {
+      position: absolute;
+      left: 0;
+      z-index: 9998;
+      top: -174px;
+      padding: 0;
+    }
+
+    input {
+      &.el-input__inner {
+        //background-color: #F3FAFE;
+        border-color: rgba($brand-primary-color, 0.6);
+        outline: $none-value;
+        @include box-shadow($none-value);
+        @include transition($base-transition);
+        @media #{$small-only} {
+          height: 45px;
+          border-color: transparent;
+          @include border-radius(0);
+          padding-left: 12px;
+        }
+        &:focus {
+          @media #{$small-only} {
+            background-color: #f3fafe;
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$small-only} {
+    height: 34px;
+
+    input.el-input__inner {
+      //margin-left: 0;
+      font-size: 16px;
+    }
+
+    .icon-calendar {
+      top: 8px;
+    }
+  }
+}
