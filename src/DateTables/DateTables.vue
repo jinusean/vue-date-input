@@ -58,8 +58,8 @@
 </template>
 <script>
 import { t } from 'element-ui/lib/locale'
-import { nextMonth, prevMonth } from '../../util/index'
-import DateTable from './DateTable'
+import { nextMonth, prevMonth } from '../util/index'
+import DateTable from './DateTable.vue'
 
 export default {
   name: 'DateTables',
@@ -157,4 +157,4 @@ export default {
   }
 }
 </script>
-<style src="../../styles/date-tables.scss" lang="scss" />
+<style src="../styles/date-tables.scss" lang="scss" />

@@ -3,13 +3,13 @@
     ref="input"
     :value="displayValue"
     :size="size"
-    prefix-icon="icon-date"
+    prefix-icon="icon-calendar"
     @change.native="updateValue($event.target.value)"
   />
 </template>
 <script>
 import Locale from 'element-ui/lib/mixins/locale'
-import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from '../../util/display'
+import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from '../util/display'
 import { Input } from 'element-ui'
 
 export default {

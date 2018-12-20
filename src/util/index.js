@@ -1,6 +1,8 @@
 import dateUtil from 'element-ui/lib/utils/date'
 import { t } from 'element-ui/lib/locale'
 
+const translate = string => t(string, 'en')
+
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 const months = [
   'jan',

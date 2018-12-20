@@ -35,7 +35,7 @@ import {
   getDayCountOfMonth,
   getStartDateOfMonth,
   DAY_DURATION
-} from '../../util/index'
+} from '../util/index'
 import { hasClass } from 'element-ui/lib/utils/dom'
 import Locale from 'element-ui/lib/mixins/locale'
 
@@ -412,4 +412,4 @@ export default {
   }
 }
 </script>
-<style src="../../styles/date-table.scss" lang="scss" />
+<style src="../styles/date-table.scss" lang="scss" />

@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import DateInput from './DateInput'
+import DateInput from './DateInput.vue'
 
 export default {
   name: 'DateInputs',
@@ -111,11 +111,11 @@ export default {
       }
     }
 
-    @media #{$small-only} {
-      .el-input__inner {
-        min-width: 0;
-      }
-    }
+    //@media #{$small-only} {
+      /*.el-input__inner {*/
+        /*min-width: 0;*/
+      /*}*/
+    /*}*/
   }
 }
 </style>

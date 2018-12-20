@@ -44,10 +44,10 @@
 </template>
 
 <script type="text/babel">
-import { toDate } from '../util/index'
+import { toDate } from './util/index'
 import Locale from 'element-ui/lib/mixins/locale'
-import DateInputs from './DateInputs'
-import DateTables from './DateTables'
+import DateInputs from './DateInputs/DateInputs.vue'
+import DateTables from './DateTables/DateTables.vue'
 
 const calcDefaultValue = defaultValue => {
   if (Array.isArray(defaultValue)) {
@@ -78,7 +78,7 @@ export default {
       },
       value: null,
       visible: false,
-      disabledDate: null
+      disabledDate: () => false
     }
   },
   watch: {
@@ -135,4 +135,4 @@ export default {
   }
 }
 </script>
-<style src="../styles/date-range.scss" lang="scss" />
+<style src="./styles/date-range.scss" lang="scss" />

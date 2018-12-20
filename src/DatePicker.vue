@@ -1,11 +1,11 @@
 <template>
-  <el-input
-    v-clickoutside="hidePicker"
+  <ElInput
+    :id="id"
     ref="reference"
+    v-clickoutside="hidePicker"
     :class="inputClass"
     :readonly="true"
     :size="size"
-    :id="id"
     :placeholder="placeholder"
     :name="name"
     :value="displayValue"
@@ -20,12 +20,12 @@
 
 <script>
 import Vue from 'vue'
-import DateRange from './DateRange'
-import popperMixin from './popperMixin'
-import Clickoutside from 'element-ui/lib/utils/clickoutside'
-import { equalDate, isDate } from '../util/index'
-import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from '../util/display'
-import Emitter from 'element-ui/lib/mixins/emitter'
+import DateRange from './DateRange.vue'
+import popperMixin from './popperMixin.js'
+import Clickoutside from 'element-ui/lib/utils/clickoutside.js'
+import { equalDate, isDate } from './util/index.js'
+import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from './util/display.js'
+import Emitter from 'element-ui/lib/mixins/emitter.js'
 import { Input } from 'element-ui'
 
 // only considers date-picker's value: Date or [Date, Date]
@@ -66,7 +66,9 @@ export default {
     },
     defaultValue: {
       type: Array,
-      default: undefined
+      default() {
+        return [new Date(), new Date()]
+      }
     },
     rangeSeparator: {
       type: String,
@@ -336,4 +338,4 @@ export default {
   }
 }
 </script>
-<style src="../styles/date-picker.scss" lang="scss" />
+<style src="./styles/date-picker.scss" lang="scss" />

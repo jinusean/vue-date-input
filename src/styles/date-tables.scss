@@ -24,9 +24,9 @@
     &.is-left {
       border: 0;
 
-      @media #{$small-only} {
-        border-bottom: $border-default;
-      }
+      //@media #{$small-only} {
+      //  border-bottom: $border-default;
+      //}
     }
 
     .date-tables__panel__header {
@@ -38,13 +38,13 @@
         margin-left: 6px;
         float: left;
 
-        @media #{$small-only} {
-          padding: 8px;
-          margin-left: 0;
-          position: relative;
-          left: -4px;
-          top: -6px;
-        }
+        //@media #{$small-only} {
+        //  padding: 8px;
+        //  margin-left: 0;
+        //  position: relative;
+        //  left: -4px;
+        //  top: -6px;
+        //}
       }
 
       div {
@@ -77,14 +77,14 @@
     }
   }
 
-  @media #{$small-only} {
-    .date-tables__panel {
-      width: 100%;
-
-      &.is-left {
-        border-bottom: $border-default;
-        border-right: $none-value;
-      }
-    }
-  }
+  //@media #{$small-only} {
+  //  .date-tables__panel {
+  //    width: 100%;
+  //
+  //    &.is-left {
+  //      border-bottom: $border-default;
+  //      border-right: $none-value;
+  //    }
+  //  }
+  //}
 }
