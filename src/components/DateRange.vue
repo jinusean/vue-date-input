@@ -1,14 +1,17 @@
 <template>
-  <transition 
+  <Transition 
     name="zoom-in-top" 
-    @after-leave="$emit('dodestroy')">
+    @after-leave="$emit('dodestroy')"
+  >
     <div 
       v-show="visible" 
-      class="date-range">
+      class="date-range"
+    >
       <div 
         v-if="value" 
-        class="date-range__content">
-        <date-inputs
+        class="date-range__content"
+      >
+        <DateInputs
           ref="dateInputs"
           :dates="value"
           :min-date="minDate"
@@ -17,7 +20,7 @@
           @pick="onPick"
         />
 
-        <date-tables
+        <DateTables
           :date="date"
           :min-date="minDate"
           :max-date="maxDate"
@@ -29,25 +32,29 @@
         />
 
         <div class="date-range__footer">
-          <button 
-            class="btn btn-link btn-cancel" 
-            @click="$emit('close')">
+          <button
+            class="btn-cancel"
+            @click="$emit('close')"
+          >
             Cancel
           </button>
           <button 
-            class="btn btn-primary" 
-            @click="handleConfirm">Apply</button>
+            class="btn-confirm"
+            @click="handleConfirm"
+          >
+            Apply
+          </button>
         </div>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script type="text/babel">
-import { toDate } from './util/index'
+import { toDate } from '../util/index'
 import Locale from 'element-ui/lib/mixins/locale'
-import DateInputs from './DateInputs/DateInputs.vue'
-import DateTables from './DateTables/DateTables.vue'
+import DateInputs from './DateInputs.vue'
+import DateTables from './DateTables.vue'
 
 const calcDefaultValue = defaultValue => {
   if (Array.isArray(defaultValue)) {
@@ -135,4 +142,3 @@ export default {
   }
 }
 </script>
-<style src="./styles/date-range.scss" lang="scss" />

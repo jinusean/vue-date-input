@@ -2,7 +2,6 @@
   <ElInput
     :id="id"
     ref="reference"
-    v-clickoutside="hidePicker"
     :class="inputClass"
     :readonly="true"
     :size="size"
@@ -13,26 +12,25 @@
     class="date-picker"
     prefix-icon="icon-calendar"
     @focus="showPicker"
-    @keydown.native="handleKeydown"
     @change.native="displayValue = $event.target.value"
   />
 </template>
 
 <script>
 import Vue from 'vue'
-import DateRange from './DateRange.vue'
-import popperMixin from './popperMixin.js'
-import Clickoutside from 'element-ui/lib/utils/clickoutside.js'
-import { equalDate, isDate } from './util/index.js'
-import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from './util/display.js'
-import Emitter from 'element-ui/lib/mixins/emitter.js'
+import DateRange from './DateRange'
+import popperMixin from '../util/popperMixin'
+import Clickoutside from 'element-ui/lib/utils/clickoutside'
+import { equalDate, isDate } from '../util/index'
+import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from '../util/display'
+import Emitter from 'element-ui/lib/mixins/emitter'
 import { Input } from 'element-ui'
-
+import tabbable from 'tabbable'
 // only considers date-picker's value: Date or [Date, Date]
 
 export default {
   name: 'DatePicker',
-  components: { ElInput: Input, DateRange },
+  components: { ElInput: Input },
   directives: { Clickoutside },
   mixins: [Emitter, popperMixin],
   props: {
@@ -66,9 +64,7 @@ export default {
     },
     defaultValue: {
       type: Array,
-      default() {
-        return [new Date(), new Date()]
-      }
+      default: undefined
     },
     rangeSeparator: {
       type: String,
@@ -212,13 +208,14 @@ export default {
     },
 
     hidePicker() {
-      if (this.picker) {
-        this.dispatch('ElFormItem', 'el.form.blur')
-        this.pickerVisible = this.picker.visible = false
-        this.$refs.reference.blur()
-        document.body.removeEventListener('keydown', this.handleKeydown)
-        this.destroyPopper()
+      if (!this.picker) {
+        return
       }
+      this.dispatch('ElFormItem', 'el.form.blur')
+      this.pickerVisible = this.picker.visible = false
+      document.body.removeEventListener('click', this.handleBodyClick)
+      document.body.removeEventListener('keydown', this.handleKeydown)
+      this.destroyPopper()
     },
 
     showPicker() {
@@ -230,20 +227,32 @@ export default {
       this.picker.resetView()
       this.picker.visible = true
       this.pickerVisible = true
-      setTimeout(() => {}, 2000)
+
       this.updatePopper()
 
       this.$nextTick(() => {
         this.picker.ajustScrollTop && this.picker.ajustScrollTop()
       })
-
+      document.body.addEventListener('click', this.handleBodyClick)
       document.body.addEventListener('keydown', this.handleKeydown)
+    },
+
+    handleBodyClick({ target }) {
+      console.log('handleBodyClick')
+      if (
+        this.reference.contains(target) ||
+        this.popperElm.contains(target)
+      ) {
+        return
+      }
+      this.hidePicker()
     },
 
     mountPicker() {
       this.panel.defaultValue = this.defaultValue || this.currentValue
       this.picker = new Vue(this.panel).$mount()
       this.popperElm = this.picker.$el
+      this.popperElm.addEventListener('keydown', this.onPopperKeyDown)
       if (this.format) {
         this.picker.format = this.format
       }
@@ -334,8 +343,46 @@ export default {
         }
         this.picker.$el.parentNode.removeChild(this.picker.$el)
       }
+    },
+
+    onPopperKeyDown(event) {
+      if (event.key.toUpperCase() !== 'TAB') {
+        return
+      }
+
+      const { target } = event
+      const popperTabbable = tabbable(this.popperElm)
+      let nextIndexOperand
+
+      if (event.shiftKey && target === popperTabbable[0]) {
+        // shit+tab on first tabbable element of date-picker popup
+        nextIndexOperand = -1
+      } else if (
+        !event.shiftKey &&
+        target === popperTabbable[popperTabbable.length - 1]
+      ) {
+        // tab on last tabbable element of date-picker popup
+        nextIndexOperand = 1
+      } else {
+        // tabbing through date-picker elemnets
+        return
+      }
+
+      event.preventDefault()
+      const tabbableElements = tabbable(document.body)
+      let nextIndex =
+        tabbableElements.indexOf(this.reference.children[0]) +
+        nextIndexOperand
+
+      if (nextIndex < 0) {
+        nextIndex = tabbableElements.length - 1
+      } else if (tabbableElements === tabbableElements.length) {
+        nextIndex = 0
+      }
+
+      this.hidePicker()
+      tabbableElements[nextIndex].focus()
     }
   }
 }
 </script>
-<style src="./styles/date-picker.scss" lang="scss" />

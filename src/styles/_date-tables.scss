@@ -10,8 +10,11 @@
 
     &.is-right {
       .date-tables__panel__header {
-        button {
-          float: right;
+        .buttons-wrapper {
+          position: absolute;
+          top: 0;
+          right: 0;
+          margin: 0;
         }
 
         div {
@@ -58,7 +61,6 @@
         border: 0;
         background: transparent;
         cursor: pointer;
-        outline: none;
         margin-top: 3px;
 
         &:hover {

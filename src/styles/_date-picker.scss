@@ -1,0 +1,136 @@
+.date-picker {
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;;
+}
+
+.date-picker.el-input {
+  height: 30px;
+  width: 212px;
+
+  input.el-input__inner {
+    width: inherit;
+    height: inherit;
+    margin: 0;
+  }
+
+  // Not used?
+  .date-picker-mobile {
+    &:before {
+      background: white;
+      width: 99%;
+      height: 2px;
+      content: "";
+      display: inline-block;
+      position: absolute;
+      bottom: 1px;
+      z-index: 9999;
+      right: 1px;
+      //@media #{$small-only} {
+      //  background: transparent;
+      //}
+    }
+
+    //@media #{$small-only} {
+    //  position: absolute;
+    //  left: 0;
+    //  z-index: 9998;
+    //  top: -174px;
+    //  padding: 0;
+    //}
+
+    input {
+      &.el-input__inner {
+        //background-color: #F3FAFE;
+        border-color: rgba(#15a2ed, 0.6);
+        box-shadow: none;
+
+        //@media #{$small-only} {
+        //  height: 45px;
+        //  border-color: transparent;
+        //  @include border-radius(0);
+        //  padding-left: 12px;
+        //}
+        //&:focus {
+        //  @media #{$small-only} {
+        //    background-color: #f3fafe;
+        //  }
+        //}
+      }
+    }
+  }
+
+  //@media #{$small-only} {
+  //  height: 34px;
+  //
+  //  input.el-input__inner {
+  //    //margin-left: 0;
+  //    font-size: 16px;
+  //  }
+  //
+  //  .icon-calendar {
+  //    top: 8px;
+  //  }
+  //}
+}
+
+.date-picker-open {
+  &:before {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    z-index: 9999;
+    display: inline-block;
+    width: 99%;
+    height: 2px;
+    content: "";
+    background: white;
+    //@media #{$small-only} {
+    //  background: transparent;
+    //}
+  }
+
+  //@media #{$small-only} {
+  //  position: absolute;
+  //  top: -174px;
+  //  left: 0;
+  //  z-index: 9998;
+  //  padding: 0;
+  //}
+
+  input {
+    &.el-input__inner {
+      //background-color: #F3FAFE;
+      border-color: rgba(#15a2ed, 0.6);
+      //outline: $none-value;
+      box-shadow: none;
+      transition: all 0.3s ease-in;
+      //@media #{$small-only} {
+      //  height: 45px;
+      //  padding-left: 12px;
+      //  border-color: transparent;
+      //  border-radius: 0;
+      //}
+      &:focus {
+        //@media #{$small-only} {
+        //  background-color: #f3fafe;
+        //}
+      }
+    }
+  }
+
+  i {
+    &.el-input__icon {
+      //color: rgba($brand-text-color, 0.5);
+      //@media #{$small-only} {
+      //  top: 2px;
+      //  right: 0;
+      //  cursor: pointer;
+      //}
+
+      //&:before {
+      //  @media #{$small-only} {
+      //    content: "\f147";
+      //  }
+      //}
+    }
+  }
+}

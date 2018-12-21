@@ -1,4 +1,4 @@
-import DatePicker from './DatePicker.vue'
+import DatePicker from './components/DatePicker.vue'
 import './styles/styles.scss'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'

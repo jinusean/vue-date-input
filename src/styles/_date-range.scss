@@ -4,6 +4,7 @@
   border-radius: 0 0 3px 3px;
   margin-top: -3px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
   box-sizing: border-box;
   background: #fff;
   color: rgb(72, 87, 106);
@@ -21,13 +22,16 @@
       padding: 0 16px 16px;
 
       button {
+        border: none;
+        cursor: pointer;
+
         &.btn-cancel {
           color: rgb(72, 87, 106);
           font-weight: 600;
+        }
 
-          &:hover {
-            color: black;
-          }
+        &.btn-confirm {
+
         }
       }
     }

@@ -8,22 +8,25 @@
   >
     <tbody>
       <tr>
-        <th 
-          v-for="(week, index) in WEEKS" 
-          :key="index">
+        <th
+          v-for="(week, index) in WEEKS"
+          :key="index"
+        >
           {{ t('el.datepicker.weeks.' + week) }}
         </th>
       </tr>
-      <tr 
-        v-for="(row, index) in rows" 
-        :key="index" 
-        class="el-date-table__row">
+      <tr
+        v-for="(row, index) in rows"
+        :key="index"
+        class="el-date-table__row"
+      >
         <td
           v-for="(cell, index) in row"
           :key="index"
           :class="getCellClasses(cell)"
-          v-text="cell.type === 'today' ? t('el.datepicker.today') : cell.text"
-        />
+        >
+        {{ cell.text }}
+        </td>
       </tr>
     </tbody>
   </table>
@@ -412,4 +415,3 @@ export default {
   }
 }
 </script>
-<style src="../styles/date-table.scss" lang="scss" />

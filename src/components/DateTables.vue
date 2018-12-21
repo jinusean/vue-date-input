@@ -14,7 +14,7 @@
         />
         <div>{{ leftLabel }}</div>
       </div>
-      <date-table
+      <DateTable
         :date="date"
         :year="leftYear"
         :month="leftMonth"
@@ -29,19 +29,21 @@
     </div>
     <div class="date-tables__panel is-right">
       <div class="date-tables__panel__header">
-        <button
-          type="button"
-          class="date-tables__icon-btn el-icon-d-arrow-right"
-          @click="nextYear"
-        />
-        <button
-          type="button"
-          class="date-tables__icon-btn el-icon-arrow-right"
-          @click="nextMonth"
-        />
         <div>{{ rightLabel }}</div>
+        <div class="buttons-wrapper">
+          <button
+            type="button"
+            class="date-tables__icon-btn el-icon-arrow-right"
+            @click="nextMonth"
+          />
+          <button
+            type="button"
+            class="date-tables__icon-btn el-icon-d-arrow-right"
+            @click="nextYear"
+          />
+        </div>
       </div>
-      <date-table
+      <DateTable
         :date="rightDate"
         :year="rightYear"
         :month="rightMonth"
@@ -157,4 +159,3 @@ export default {
   }
 }
 </script>
-<style src="../styles/date-tables.scss" lang="scss" />

@@ -94,28 +94,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.date-inputs {
-  display: flex;
-  justify-content: space-between;
-
-  .date-input-wrapper {
-    width: 100%;
-    padding: 12px 16px 0;
-
-    .el-date-editor {
-      width: 100%;
-
-      .el-input__inner {
-        margin: 0;
-      }
-    }
-
-    //@media #{$small-only} {
-      /*.el-input__inner {*/
-        /*min-width: 0;*/
-      /*}*/
-    /*}*/
-  }
-}
-</style>

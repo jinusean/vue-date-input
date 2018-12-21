@@ -1,4 +1,4 @@
-import DatePicker from './src/DatePicker'
+import DatePicker from './src/components/DatePicker'
 
 /* istanbul ignore next */
 DatePicker.install = function install(Vue) {

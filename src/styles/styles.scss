@@ -1,46 +1,10 @@
 @import "~element-ui/lib/theme-chalk/input.css";
-//@import "~element-ui/lib/theme-chalk/date-picker.css";
 @import "~element-ui/lib/theme-chalk/icon.css";
-@import "icons.scss";
 
-.el-date-range-picker__header button {
-  margin-left: 6px;
-}
-
-.el-icon-d-arrow-left,
-.el-icon-d-arrow-right,
-.el-icon-arrow-left,
-.el-icon-arrow-right {
-  &:before {
-    font-size: 8px;
-  }
-}
-
-.el-date-range-picker__header {
-  div {
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-
-  button {
-    //@media #{$small-only} {
-    //  padding: 8px;
-    //  margin-left: 0;
-    //  position: relative;
-    //  left: -4px;
-    //  top: -6px;
-    //}
-  }
-}
-
-.el-date-table {
-  td {
-    &.in-range {
-      background-color: rgba(#15a2ed, 0.05);
-    }
-
-    &.disabled {
-      background-color: rgba(#f5f8fc, 0.8);;
-    }
-  }
-}
+@import "_date-inputs.scss";
+@import "_date-picker.scss";
+@import "_date-picker-sm.scss";
+@import "_date-range.scss";
+@import "_date-table.scss";
+@import "_date-tables.scss";
+@import "_icons.scss";
