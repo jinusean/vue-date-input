@@ -4429,6 +4429,13 @@ vlq@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vlq/-/vlq-1.0.0.tgz#8101be90843422954c2b13eb27f2f3122bdcc806"
 
+vue-date-input@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-date-input/-/vue-date-input-1.0.1.tgz#e8838207bac237a5b56813363a95305d84821591"
+  dependencies:
+    element-ui "^2.4.11"
+    tabbable "3.1.1"
+
 vue-eslint-parser@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-4.0.3.tgz#80cf162e484387b2640371ad21ba1f86e0c10a61"

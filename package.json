@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "element-ui": "^2.4.11",
-    "tabbable": "3.1.1"
+    "tabbable": "3.1.1",
+    "vue-date-input": "^1.0.1"
   }
 }
