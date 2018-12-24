@@ -1,6 +1,6 @@
 {
   "name": "vue-date-input",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fully accessible date range input/picker",
   "repository": "https://gitlab.com/jinusean/vue-date-input",
   "author": "James C. Lee",
