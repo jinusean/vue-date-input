@@ -7,7 +7,7 @@
 <script>
 import DatePicker from "../src";
 // import '../dist/styles.css'
-// import DatePicker from '../dist/my-component.esm'
+// import DatePicker from '../dist/index.esm'
 
 export default {
   components: { DatePicker },

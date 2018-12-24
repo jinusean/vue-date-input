@@ -6,5 +6,8 @@ module.exports = {
     'plugin:vue/recommended',
   ],
   rules: {
+  },
+  globals: {
+    global: true
   }
 }
