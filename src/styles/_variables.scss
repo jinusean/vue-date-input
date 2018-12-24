@@ -1,7 +1,11 @@
-$small-only : only screen and (max-width: 39.938em);
+$small-only: only screen and
+  (
+    max-width: 39.938em
+  );
 $text-color: #344050;
 
-$font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+$font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+  Microsoft YaHei, SimSun, sans-serif;
 
 $primary-color: rgba(#15a2ed, 0.6);
 $border-radius: 3px;
@@ -11,7 +15,6 @@ $box-shadow: 0 5px 10px $shadow-color;
 
 $input-color: lighten($text-color, 50%);
 $calendar-color: rgb(72, 87, 106);
-
 
 $table-color: rgb(131, 145, 165);
 $table-available-hover: rgb(228, 232, 241);

@@ -1,14 +1,14 @@
 <template>
-  <Transition 
-    name="zoom-in-top" 
+  <Transition
+    name="zoom-in-top"
     @after-leave="$emit('dodestroy')"
   >
-    <div 
-      v-show="visible" 
+    <div
+      v-show="visible"
       class="date-range"
     >
-      <div 
-        v-if="value" 
+      <div
+        v-if="value"
         class="date-range__content"
       >
         <DateInputs
@@ -38,7 +38,7 @@
           >
             Cancel
           </button>
-          <button 
+          <button
             class="btn-confirm"
             @click="handleConfirm"
           >
@@ -50,21 +50,20 @@
   </Transition>
 </template>
 
-<script type="text/babel">
-import { toDate } from '../util/index'
-import DateInputs from './DateInputs.vue'
-import DateTables from './DateTables.vue'
+<script>
+import DateInputs from "./DateInputs.vue";
+import DateTables from "./DateTables.vue";
 
 const calcDefaultValue = defaultValue => {
   if (Array.isArray(defaultValue)) {
-    return defaultValue[0] ? new Date(defaultValue[0]) : new Date()
+    return defaultValue[0] ? new Date(defaultValue[0]) : new Date();
   } else {
-    return new Date(defaultValue)
+    return new Date(defaultValue);
   }
-}
+};
 
 export default {
-  name: 'DateRange',
+  name: "DateRange",
   components: { DateInputs, DateTables },
   data() {
     return {
@@ -84,59 +83,59 @@ export default {
       value: null,
       visible: false,
       disabledDate: () => false
-    }
+    };
   },
   watch: {
     visible(visible) {
       if (!visible) {
-        return
+        return;
       }
       // Delay to next tick because dateInputs is not yet visible, v-if
       this.$nextTick(() => {
-        this.$refs.dateInputs.focus()
-      })
+        this.$refs.dateInputs.focus();
+      });
     },
     value(newVal) {
       if (!newVal) {
-        this.minDate = null
-        this.maxDate = null
+        this.minDate = null;
+        this.maxDate = null;
       } else if (Array.isArray(newVal)) {
-        this.resetView(newVal)
+        this.resetView(newVal);
       }
     }
   },
 
   methods: {
     resetView(newVal = this.value) {
-      this.minDate = newVal[0] ? toDate(newVal[0]) : null
-      this.maxDate = newVal[1] ? toDate(newVal[1]) : null
-      if (this.minDate) this.date = new Date(this.minDate)
+      this.minDate = new Date(newVal[0])
+      this.maxDate = new Date(newVal[1])
+      if (this.minDate) this.date = new Date(this.minDate);
     },
     onRange(val) {
-      this.minDate = val.minDate
-      this.maxDate = val.maxDate
-      this.rangeState = val.rangeState
+      this.minDate = val.minDate;
+      this.maxDate = val.maxDate;
+      this.rangeState = val.rangeState;
     },
     onPick(val) {
       if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
-        return
+        return;
       }
-      this.maxDate = val.maxDate
-      this.minDate = val.minDate
+      this.maxDate = val.maxDate;
+      this.minDate = val.minDate;
 
       // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
       setTimeout(() => {
-        this.maxDate = val.maxDate
-        this.minDate = val.minDate
-      }, 10)
+        this.maxDate = val.maxDate;
+        this.minDate = val.minDate;
+      }, 10);
     },
     onDate(date) {
-      this.date = date
+      this.date = date;
     },
 
     handleConfirm() {
-      this.$emit('pick', [this.minDate, this.maxDate])
+      this.$emit("pick", [this.minDate, this.maxDate]);
     }
   }
-}
+};
 </script>

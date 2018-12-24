@@ -1,14 +1,19 @@
-import DatePicker from './components/DatePicker.vue'
-import './styles/styles.scss'
-import lang from 'element-ui/lib/locale/lang/en'
-import locale from 'element-ui/lib/locale'
-
-// configure language
-locale.use(lang)
+import DatePicker from "./components/DatePicker.vue";
+import "./styles/styles.scss";
 
 /* istanbul ignore next */
 DatePicker.install = function install(Vue) {
-  Vue.component(DatePicker.name, DatePicker)
+  Vue.component(DatePicker.name, DatePicker);
+};
+
+let GlobalVue = null;
+if (typeof window !== "undefined") {
+  GlobalVue = window.Vue;
+} else if (typeof global !== "undefined") {
+  GlobalVue = global.Vue;
+}
+if (GlobalVue) {
+  GlobalVue.use(DatePicker);
 }
 
-export default DatePicker
+export default DatePicker;

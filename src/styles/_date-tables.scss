@@ -1,12 +1,12 @@
 .date-tables {
   .date-tables__panel {
-    float: left;
     position: relative;
-    min-width: 14em;
-    width: 50%;
-    margin: 0;
-    padding: 1em;
     box-sizing: border-box;
+    float: left;
+    width: 50%;
+    min-width: 14em;
+    padding: 1em;
+    margin: 0;
 
     &.is-right .buttons-wrapper {
       right: 0;
@@ -22,8 +22,8 @@
 
     .date-tables__panel__header {
       position: relative;
-      text-align: center;
       height: 1.75em;
+      text-align: center;
 
       .buttons-wrapper {
         position: absolute;
@@ -35,27 +35,27 @@
           float: left;
 
           @media #{$small-only} {
+            position: relative;
+            top: -0.375em;
+            left: -0.25em;
             padding: 0.5em;
             margin-left: 0;
-            position: relative;
-            left: -0.25em;
-            top: -0.375em;
           }
         }
       }
 
       .date_tables__month {
-        color: darken($table-color, 40%);
-        font-weight: 500;
-        text-transform: capitalize;
         font-size: 14px;
+        font-weight: 500;
+        color: darken($table-color, 40%);
+        text-transform: capitalize;
       }
 
       .date-tables__icon-btn {
         font-weight: bolder;
-        border: 0;
-        background: transparent;
         cursor: pointer;
+        background: transparent;
+        border: 0;
 
         &:hover {
           color: #20a0ff;

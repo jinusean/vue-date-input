@@ -1,26 +1,28 @@
 <template>
   <div class="date-inputs">
     <div class="date-input-wrapper">
-      <date-input 
-        ref="minDate" 
-        v-model="start" 
-        size="small" 
-        @input="onStart" />
+      <DateInput
+        ref="minDate"
+        v-model="start"
+        size="small"
+        @input="onStart"
+      />
     </div>
     <div class="date-input-wrapper">
-      <date-input 
-        ref="maxDate" 
-        v-model="end" 
-        size="small" 
-        @input="onEnd" />
+      <DateInput
+        ref="maxDate"
+        v-model="end"
+        size="small"
+        @input="onEnd"
+      />
     </div>
   </div>
 </template>
 <script>
-import DateInput from './DateInput.vue'
+import DateInput from "./DateInput.vue";
 
 export default {
-  name: 'DateInputs',
+  name: "DateInputs",
   components: { DateInput },
   props: {
     dates: {
@@ -44,53 +46,53 @@ export default {
     return {
       start: null,
       end: null
-    }
+    };
   },
   watch: {
     minDate: {
       immediate: true,
       handler(val) {
         if (!val) {
-          return
+          return;
         }
-        this.start = new Date(val)
+        this.start = new Date(val);
       }
     },
     maxDate: {
       immediate: true,
       handler(val) {
         if (!val) {
-          return // will be null while user is selecting in date-table
+          return; // will be null while user is selecting in date-table
         }
-        this.end = new Date(val)
+        this.end = new Date(val);
       }
     }
   },
   methods: {
     focus(index = 0) {
-      const inputs = ['minDate', 'maxDate']
-      this.$refs[inputs[index]].focus()
+      const inputs = ["minDate", "maxDate"];
+      this.$refs[inputs[index]].focus();
     },
     onStart(value) {
       if (this.disabledDate(value) || value > this.end) {
-        this.start = new Date(this.dates[0])
+        this.start = new Date(this.dates[0]);
       } else {
-        this.$refs.maxDate.focus()
+        this.$refs.maxDate.focus();
       }
-      this.emitPick()
+      this.emitPick();
     },
     onEnd(value) {
       if (this.disabledDate(value) || value < this.start) {
-        this.end = new Date(this.dates[1])
+        this.end = new Date(this.dates[1]);
       }
-      this.emitPick()
+      this.emitPick();
     },
     emitPick() {
-      this.$emit('pick', {
+      this.$emit("pick", {
         minDate: this.start,
         maxDate: this.end
-      })
+      });
     }
   }
-}
+};
 </script>

@@ -1,4 +1,4 @@
-import Popper from 'element-ui/lib/utils/vue-popper'
+import Popper from "element-ui/lib/utils/vue-popper";
 
 export default {
   props: {
@@ -9,4 +9,4 @@ export default {
   methods: Popper.methods,
   data: Popper.data,
   beforeDestroy: Popper.beforeDestroy
-}
+};

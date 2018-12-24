@@ -1,26 +1,34 @@
 <template>
   <div class="container">
-    <DatePicker v-model="dates"/>
+    <DatePicker v-model="dates" />
   </div>
 </template>
 
 <script>
-import DatePicker from '../src'
+import DatePicker from "../src";
+// import '../dist/styles.css'
+// import DatePicker from '../dist/my-component.esm'
 
 export default {
   components: { DatePicker },
   data() {
     return {
       dates: [new Date(), new Date()]
-    }
+    };
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+html,
+body {
+  height: 100%;
+}
+
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  height: 100%;
+  padding-top: 20%;
 }
 </style>
