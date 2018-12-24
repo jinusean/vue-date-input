@@ -2,17 +2,19 @@
   <div class="date-tables">
     <div class="date-tables__panel is-left">
       <div class="date-tables__panel__header">
-        <button
-          type="button"
-          class="date-tables__icon-btn el-icon-d-arrow-left"
-          @click="prevYear"
-        />
-        <button
-          type="button"
-          class="date-tables__icon-btn el-icon-arrow-left"
-          @click="prevMonth"
-        />
-        <div>{{ leftLabel }}</div>
+        <div class="buttons-wrapper">
+          <button
+            type="button"
+            class="date-tables__icon-btn el-icon-d-arrow-left"
+            @click="prevYear"
+          />
+          <button
+            type="button"
+            class="date-tables__icon-btn el-icon-arrow-left"
+            @click="prevMonth"
+          />
+        </div>
+        <div class="date_tables__month">{{ leftLabel }}</div>
       </div>
       <DateTable
         :date="date"
@@ -22,14 +24,13 @@
         :max-date="maxDate"
         :range-state="rangeState"
         :disabled-date="disabledDate"
-        selection-mode="range"
         @range="$emit('range', $event)"
         @pick="$emit('pick', $event)"
       />
     </div>
     <div class="date-tables__panel is-right">
       <div class="date-tables__panel__header">
-        <div>{{ rightLabel }}</div>
+        <div class="date_tables__month">{{ rightLabel }}</div>
         <div class="buttons-wrapper">
           <button
             type="button"
@@ -51,7 +52,6 @@
         :max-date="maxDate"
         :range-state="rangeState"
         :disabled-date="disabledDate"
-        selection-mode="range"
         @range="$emit('range', $event)"
         @pick="$emit('pick', $event)"
       />
@@ -59,8 +59,7 @@
   </div>
 </template>
 <script>
-import { t } from 'element-ui/lib/locale'
-import { nextMonth, prevMonth } from '../util/index'
+import months from '../util/months'
 import DateTable from './DateTable.vue'
 
 export default {
@@ -89,26 +88,11 @@ export default {
     }
   },
   computed: {
-    btnDisabled() {
-      return !(this.minDate && this.maxDate && !this.selecting)
-    },
     leftLabel() {
-      return (
-        this.date.getFullYear() +
-        ' ' +
-        t('el.datepicker.year') +
-        ' ' +
-        t(`el.datepicker.month${this.date.getMonth() + 1}`)
-      )
+      return months[this.leftMonth] + ' ' + this.leftYear
     },
     rightLabel() {
-      return (
-        this.rightDate.getFullYear() +
-        ' ' +
-        t('el.datepicker.year') +
-        ' ' +
-        t(`el.datepicker.month${this.rightDate.getMonth() + 1}`)
-      )
+      return months[this.rightMonth] + ' ' + this.rightYear
     },
     leftYear() {
       return this.date.getFullYear()
@@ -137,12 +121,60 @@ export default {
     }
   },
   methods: {
-    prevMonth() {
-      this.$emit('date', prevMonth(this.date))
-    },
+    getDayCountOfMonth(year, month) {
+      if (month === 3 || month === 5 || month === 8 || month === 10) {
+        return 30
+      }
 
+      if (month === 1) {
+        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+          return 29
+        } else {
+          return 28
+        }
+      }
+
+      return 31
+    },
+    prevMonth() {
+      const src = this.date
+      const year = src.getFullYear()
+      const month = src.getMonth()
+      const date = src.getDate()
+
+      const newYear = month === 0 ? year - 1 : year
+      const newMonth = month === 0 ? 11 : month - 1
+
+      const newMonthDayCount = this.getDayCountOfMonth(newYear, newMonth)
+      if (newMonthDayCount < date) {
+        src.setDate(newMonthDayCount)
+      }
+
+      src.setMonth(newMonth)
+      src.setFullYear(newYear)
+
+      const prevMonth = new Date(src.getTime())
+      this.$emit('date', prevMonth)
+    },
     nextMonth() {
-      this.$emit('date', nextMonth(this.date))
+      const src = this.date
+      const year = src.getFullYear()
+      const month = src.getMonth()
+      const date = src.getDate()
+
+      const newYear = month === 11 ? year + 1 : year
+      const newMonth = month === 11 ? 0 : month + 1
+
+      const newMonthDayCount = this.getDayCountOfMonth(newYear, newMonth)
+      if (newMonthDayCount < date) {
+        src.setDate(newMonthDayCount)
+      }
+
+      src.setMonth(newMonth)
+      src.setFullYear(newYear)
+
+      const nextMonth = new Date(src.getTime())
+      this.$emit('date', nextMonth)
     },
 
     nextYear() {

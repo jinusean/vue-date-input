@@ -12,7 +12,7 @@
           v-for="(week, index) in WEEKS"
           :key="index"
         >
-          {{ t('el.datepicker.weeks.' + week) }}
+          {{ week }}
         </th>
       </tr>
       <tr
@@ -25,7 +25,7 @@
           :key="index"
           :class="getCellClasses(cell)"
         >
-        {{ cell.text }}
+          {{ cell.text }}
         </td>
       </tr>
     </tbody>
@@ -39,10 +39,8 @@ import {
   getStartDateOfMonth,
   DAY_DURATION
 } from '../util/index'
-import { hasClass } from 'element-ui/lib/utils/dom'
-import Locale from 'element-ui/lib/mixins/locale'
+import weeks from '../util/weeks'
 
-const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 const clearHours = function(time) {
   const cloneDate = new Date(time)
   cloneDate.setHours(0, 0, 0, 0)
@@ -50,8 +48,7 @@ const clearHours = function(time) {
 }
 
 export default {
-  mixins: [Locale],
-
+  name: 'DateTable',
   props: {
     date: {
       type: Date,
@@ -116,12 +113,7 @@ export default {
     },
 
     WEEKS() {
-      const week = this.firstDayOfWeek
-      return WEEKS.concat(WEEKS).slice(week, week + 7)
-    },
-
-    monthDate() {
-      return this.date.getDate()
+      return weeks
     },
 
     startDate() {
@@ -347,7 +339,7 @@ export default {
       let target = event.target
 
       if (target.tagName !== 'TD') return
-      if (hasClass(target, 'disabled') || hasClass(target, 'week')) return
+      if (target.classList.contains('disabled') || target.classList.contains('weeks')) return
 
       let year = Number(this.year)
       let month = Number(this.month)

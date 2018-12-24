@@ -1,4 +1,19 @@
 $small-only : only screen and (max-width: 39.938em);
-$brand-text-color: #344050;
-$border-default-color: rgba($brand-text-color, 0.15);
-$border-default: 1px solid $border-default-color;
+$text-color: #344050;
+
+$font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+
+$primary-color: rgba(#15a2ed, 0.6);
+$border-radius: 3px;
+
+$shadow-color: rgba(0, 0, 0, 0.1);
+$box-shadow: 0 5px 10px $shadow-color;
+
+$input-color: lighten($text-color, 50%);
+$calendar-color: rgb(72, 87, 106);
+
+
+$table-color: rgb(131, 145, 165);
+$table-available-hover: rgb(228, 232, 241);
+$table-in-range: rgb(210, 236, 255);
+$table-in-range-hover: rgb(175, 221, 255);

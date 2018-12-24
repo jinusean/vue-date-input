@@ -1,19 +1,35 @@
 <template>
-  <ElInput
-    :id="id"
-    ref="reference"
-    :class="inputClass"
-    :readonly="true"
-    :size="size"
-    :placeholder="placeholder"
-    :name="name"
-    :value="displayValue"
-    :validate-event="false"
-    class="date-picker"
-    prefix-icon="icon-calendar"
-    @focus="showPicker"
-    @change.native="displayValue = $event.target.value"
-  />
+  <!--<ElInput-->
+  <!--:id="id"-->
+  <!--ref="reference"-->
+  <!--:class="inputClass"-->
+  <!--:readonly="true"-->
+  <!--:size="size"-->
+  <!--:placeholder="placeholder"-->
+  <!--:name="name"-->
+  <!--:value="displayValue"-->
+  <!--:validate-event="false"-->
+  <!--class="date-picker"-->
+  <!--prefix-icon="icon-calendar"-->
+  <!--@focus="showPicker"-->
+  <!--@change.native="displayValue = $event.target.value"-->
+  <!--/>-->
+  <div class="date-picker">
+    <div class="date-input">
+      <span class="date-input__icon">
+        <i class="icon-calendar" />
+      </span>
+
+      <input
+        ref="reference"
+        :class="inputClass"
+        :value="displayValue"
+        readonly
+        @focus="showPicker"
+        @change.native="$event.target.value = displayValue"
+      >
+    </div>
+  </div>
 </template>
 
 <script>
@@ -21,18 +37,19 @@ import Vue from 'vue'
 import DateRange from './DateRange'
 import popperMixin from '../util/popperMixin'
 import Clickoutside from 'element-ui/lib/utils/clickoutside'
-import { equalDate, isDate } from '../util/index'
-import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from '../util/display'
+import {equalDate, isDate} from '../util/index'
+import {TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS} from '../util/display'
 import Emitter from 'element-ui/lib/mixins/emitter'
-import { Input } from 'element-ui'
+import {Input} from 'element-ui'
 import tabbable from 'tabbable'
 // only considers date-picker's value: Date or [Date, Date]
 
+const ANIMATION_DURATION = 300
+
 export default {
   name: 'DatePicker',
-  components: { ElInput: Input },
   directives: { Clickoutside },
-  mixins: [Emitter, popperMixin],
+  mixins: [popperMixin],
   props: {
     size: {
       type: String,
@@ -82,21 +99,14 @@ export default {
       currentValue: '',
       unwatchPickerOptions: null,
       panel: DateRange,
-      type: 'daterange'
+      type: 'daterange',
+      inputClass: ''
     }
   },
 
   computed: {
     reference() {
       return this.$refs.reference.$el
-    },
-    inputClass() {
-      let inputClass = 'el-date-editor--daterange'
-      if (this.pickerVisible) {
-        inputClass += ' date-picker-open date-picker-mobile'
-      }
-
-      return inputClass
     },
 
     valueIsEmpty() {
@@ -207,15 +217,20 @@ export default {
       }
     },
 
+
     hidePicker() {
       if (!this.picker) {
         return
       }
-      this.dispatch('ElFormItem', 'el.form.blur')
-      this.pickerVisible = this.picker.visible = false
+      // this.dispatch('ElFormItem', 'el.form.blur')
       document.body.removeEventListener('click', this.handleBodyClick)
       document.body.removeEventListener('keydown', this.handleKeydown)
       this.destroyPopper()
+      this.pickerVisible = this.picker.visible = false
+      clearTimeout(this.inputClassTimeoutId)
+      this.inputClassTimeoutId = setTimeout(() => {
+        this.inputClass = ''
+      }, ANIMATION_DURATION)
     },
 
     showPicker() {
@@ -225,8 +240,8 @@ export default {
       }
       this.picker.value = this.currentValue
       this.picker.resetView()
-      this.picker.visible = true
-      this.pickerVisible = true
+      this.picker.visible = this.pickerVisible = true
+      this.inputClass = 'date-picker-open'
 
       this.updatePopper()
 
@@ -238,10 +253,10 @@ export default {
     },
 
     handleBodyClick({ target }) {
-      console.log('handleBodyClick')
       if (
-        this.reference.contains(target) ||
-        this.popperElm.contains(target)
+        !this.$refs.reference ||
+        this.$refs.reference.contains(target) ||
+        this.picker.$el.contains(target)
       ) {
         return
       }
@@ -251,8 +266,7 @@ export default {
     mountPicker() {
       this.panel.defaultValue = this.defaultValue || this.currentValue
       this.picker = new Vue(this.panel).$mount()
-      this.popperElm = this.picker.$el
-      this.popperElm.addEventListener('keydown', this.onPopperKeyDown)
+      this.picker.$el.addEventListener('keydown', this.onPopperKeyDown)
       if (this.format) {
         this.picker.format = this.format
       }
@@ -292,7 +306,7 @@ export default {
 
       this.picker.$on('dodestroy', this.doDestroy)
       this.picker.$on('pick', (date = '') => {
-        const valueEquals = function(a, b) {
+        const valueEquals = function (a, b) {
           const aIsArray = a instanceof Array
           const bIsArray = b instanceof Array
           if (aIsArray && bIsArray) {
@@ -315,22 +329,20 @@ export default {
 
       let closeTimeoutId = null
       this.picker.$on('select-range', (start, end) => {
-        if (!this.reference) {
+        if (!this.$refs.reference) {
           return
         }
         clearTimeout(closeTimeoutId)
-        const refInput = this.reference.querySelector('input')
+        const refInput = this.$refs.reference.querySelector('input')
         refInput.setSelectionRange(start, end)
         refInput.focus()
       })
 
       this.picker.$on('close', () => {
-        this.hidePicker()
         this.$nextTick(this.picker.resetView)
-        const animationDuration = 300
         this.hidePicker()
         clearTimeout(closeTimeoutId)
-        closeTimeoutId = setTimeout(this.picker.resetView, animationDuration)
+        closeTimeoutId = setTimeout(this.picker.resetView, ANIMATION_DURATION)
       })
     },
 
@@ -351,7 +363,7 @@ export default {
       }
 
       const { target } = event
-      const popperTabbable = tabbable(this.popperElm)
+      const popperTabbable = tabbable(this.picker.$el)
       let nextIndexOperand
 
       if (event.shiftKey && target === popperTabbable[0]) {
@@ -371,7 +383,7 @@ export default {
       event.preventDefault()
       const tabbableElements = tabbable(document.body)
       let nextIndex =
-        tabbableElements.indexOf(this.reference.children[0]) +
+        tabbableElements.indexOf(this.$refs.reference.children[0]) +
         nextIndexOperand
 
       if (nextIndex < 0) {

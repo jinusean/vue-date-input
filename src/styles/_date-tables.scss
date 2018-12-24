@@ -2,90 +2,76 @@
   .date-tables__panel {
     float: left;
     position: relative;
-    min-width: 224px;
+    min-width: 14em;
     width: 50%;
     margin: 0;
-    padding: 16px;
+    padding: 1em;
     box-sizing: border-box;
 
-    &.is-right {
-      .date-tables__panel__header {
-        .buttons-wrapper {
-          position: absolute;
-          top: 0;
-          right: 0;
-          margin: 0;
-        }
-
-        div {
-          margin-left: 50px;
-          margin-right: 50px;
-        }
-      }
+    &.is-right .buttons-wrapper {
+      right: 0;
     }
 
     &.is-left {
       border: 0;
 
-      @media #{$small-only} {
-        border-bottom: $border-default;
+      .buttons-wrapper {
+        left: 0;
       }
     }
 
     .date-tables__panel__header {
       position: relative;
       text-align: center;
-      height: 28px;
+      height: 1.75em;
 
-      button {
-        margin-left: 6px;
-        float: left;
+      .buttons-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: 0;
 
-        @media #{$small-only} {
-          padding: 8px;
-          margin-left: 0;
-          position: relative;
-          left: -4px;
-          top: -6px;
+        button {
+          float: left;
+
+          @media #{$small-only} {
+            padding: 0.5em;
+            margin-left: 0;
+            position: relative;
+            left: -0.25em;
+            top: -0.375em;
+          }
         }
       }
 
-      div {
+      .date_tables__month {
+        color: darken($table-color, 40%);
+        font-weight: 500;
+        text-transform: capitalize;
         font-size: 14px;
-        margin-right: 50px;
       }
 
       .date-tables__icon-btn {
-        font-size: 12px;
-        color: rgb(151, 168, 190);
+        font-weight: bolder;
         border: 0;
         background: transparent;
         cursor: pointer;
-        margin-top: 3px;
 
         &:hover {
           color: #20a0ff;
         }
 
-        &.el-icon-d-arrow-left,
-        &.el-icon-d-arrow-right,
-        &.el-icon-arrow-left,
-        &.el-icon-arrow-right {
-          &:before {
-            font-size: 8px;
-          }
+        &:before {
+          font-size: 0.75em;
         }
       }
     }
-  }
 
-  @media #{$small-only} {
-    .date-tables__panel {
+    @media #{$small-only} {
       width: 100%;
 
       &.is-left {
-        border-bottom: $border-default;
-        border-right: none;
+        border-right-style: none;
       }
     }
   }

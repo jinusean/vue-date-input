@@ -1,29 +1,26 @@
 <template>
-  <el-input
-    ref="input"
-    :value="displayValue"
-    :size="size"
-    prefix-icon="icon-calendar"
-    @change.native="updateValue($event.target.value)"
-  />
+  <div class="date-input">
+    <!--<span class="date-input__icon">-->
+      <!--<i class="icon-calendar" />-->
+    <!--</span>-->
+
+    <input
+      ref="input"
+      v-model="displayValue"
+      @focus="$emit('focus', $event)"
+      @change="updateValue($event.target.value)"
+    >
+  </div>
 </template>
 <script>
-import Locale from 'element-ui/lib/mixins/locale'
-import { TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from '../util/display'
-import { Input } from 'element-ui'
+import {TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS} from '../util/display'
 
 export default {
   name: 'DateInput',
-  components: { ElInput: Input },
-  mixins: [Locale],
   props: {
     value: {
       type: Date,
       required: true
-    },
-    size: {
-      type: String,
-      default: 'medium'
     }
   },
   data() {
@@ -65,12 +62,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.icon-date {
-  font: normal normal normal 14px/1 FontAwesome !important;
-  right: initial;
-  &:before {
-    content: '\f133';
-  }
-}
-</style>

@@ -4,7 +4,7 @@
 
   .date-input-wrapper {
     width: 100%;
-    padding: 12px 16px 0;
+    padding: 0.75em 1em 0;
 
     .el-date-editor {
       width: 100%;
@@ -14,10 +14,10 @@
       }
     }
 
-    //@media #{$small-only} {
-    /*.el-input__inner {*/
-    /*min-width: 0;*/
-    /*}*/
-    /*}*/
+    @media #{$small-only} {
+      .el-input__inner {
+        min-width: 0;
+      }
+    }
   }
 }

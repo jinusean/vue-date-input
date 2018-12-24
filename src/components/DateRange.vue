@@ -52,7 +52,6 @@
 
 <script type="text/babel">
 import { toDate } from '../util/index'
-import Locale from 'element-ui/lib/mixins/locale'
 import DateInputs from './DateInputs.vue'
 import DateTables from './DateTables.vue'
 
@@ -67,7 +66,6 @@ const calcDefaultValue = defaultValue => {
 export default {
   name: 'DateRange',
   components: { DateInputs, DateTables },
-  mixins: [Locale],
   data() {
     return {
       minPickerWidth: 0,

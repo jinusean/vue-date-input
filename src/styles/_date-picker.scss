@@ -1,92 +1,31 @@
 .date-picker {
-  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;;
+  font-family: $font-family;
 }
 
-.date-picker.el-input {
-  height: 30px;
-  width: 212px;
+.date-picker {
+  height: 2em;
+  width: 12em;
 
-  input.el-input__inner {
-    width: inherit;
-    height: inherit;
-    margin: 0;
-  }
-
-  // Not used?
-
-  @media #{$small-only} {
-    height: 34px;
-
-    input.el-input__inner {
-      //margin-left: 0;
-      font-size: 16px;
-    }
-
-    .icon-calendar {
-      top: 8px;
-    }
+  > .date-input > input {
+    padding-left: 2em;
+    text-align: left;
   }
 }
 
 .date-picker-open {
-  &:before {
-    position: absolute;
-    right: 1px;
-    bottom: 1px;
-    z-index: 9999;
-    display: inline-block;
-    width: 99%;
-    height: 2px;
-    content: "";
-    background: white;
-    @media #{$small-only} {
-      background: transparent;
-    }
-  }
-
-  @media #{$small-only} {
-    position: absolute;
-    top: -174px;
-    left: 0;
-    z-index: 9998;
-    padding: 0;
-  }
-
-  input {
-    &.el-input__inner {
-      //background-color: #F3FAFE;
-      border-color: rgba(#15a2ed, 0.6);
-      //outline: $none-value;
-      box-shadow: none;
-      transition: all 0.3s ease-in;
-      @media #{$small-only} {
-        height: 45px;
-        padding-left: 12px;
-        border-color: transparent;
-        border-radius: 0;
-
-        &:focus {
-          background-color: #f3fafe;
-
-        }
-      }
-    }
-  }
-
-  i {
-    &.el-input__icon {
-      color: rgba($brand-text-color, 0.5);
-      @media #{$small-only} {
-        top: 2px;
-        right: 0;
-        cursor: pointer;
-      }
-
-      &:before {
-        @media #{$small-only} {
-          content: "\f147";
-        }
-      }
-    }
-  }
+  //&:before {
+  //  position: absolute;
+  //  right: 1px;
+  //  bottom: 1px;
+  //  z-index: 9999;
+  //  display: inline-block;
+  //  width: 99%;
+  //  height: 2px;
+  //  content: "";
+  //  background: white;
+  //
+  //  @media #{$small-only} {
+  //    background: transparent;
+  //  }
+  //}
 }
