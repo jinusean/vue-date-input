@@ -4429,6 +4429,15 @@ vlq@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vlq/-/vlq-1.0.0.tgz#8101be90843422954c2b13eb27f2f3122bdcc806"
 
+vue-date-input@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vue-date-input/-/vue-date-input-1.0.2.tgz#b3b7cc7efe9810d5387a450db3531fa1de838bff"
+  integrity sha512-31+1HWcnYzExSeCri8sWjl5XGJxDCdMcJaSeEbZylON/fqZ7J28BMNuCIHMFeD2y1uLKB8HZtqudnoAngYJPbw==
+  dependencies:
+    element-ui "^2.4.11"
+    tabbable "3.1.1"
+    vue-date-input "^1.0.1"
+
 vue-date-input@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/vue-date-input/-/vue-date-input-1.0.1.tgz#e8838207bac237a5b56813363a95305d84821591"
