@@ -43,8 +43,10 @@
     "vue-template-compiler": "^2.5.21"
   },
   "dependencies": {
+    "date-fns": "2.0.0-alpha.26",
     "element-ui": "^2.4.11",
     "tabbable": "3.1.1",
-    "vue-date-input": "1.0.2"
+    "vue-date-input": "1.0.2",
+    "vue-popperjs": "1.6.3"
   }
 }

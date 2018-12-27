@@ -3,10 +3,7 @@
     name="zoom-in-top"
     @after-leave="$emit('dodestroy')"
   >
-    <div
-      v-show="visible"
-      class="date-range"
-    >
+    <div class="date-range">
       <div
         v-if="value"
         class="date-range__content"
@@ -65,10 +62,14 @@ const calcDefaultValue = defaultValue => {
 export default {
   name: "DateRange",
   components: { DateInputs, DateTables },
+  props: {
+    value: {
+      type: Array,
+      default() { return [] }
+    }
+  },
   data() {
     return {
-      minPickerWidth: 0,
-      maxPickerWidth: 0,
       date: this.$options.defaultValue
         ? calcDefaultValue(this.$options.defaultValue)
         : new Date(),
@@ -80,7 +81,7 @@ export default {
         row: null,
         column: null
       },
-      value: null,
+      // value: null,
       visible: false,
       disabledDate: () => false
     };
@@ -95,12 +96,10 @@ export default {
         this.$refs.dateInputs.focus();
       });
     },
-    value(newVal) {
-      if (!newVal) {
-        this.minDate = null;
-        this.maxDate = null;
-      } else if (Array.isArray(newVal)) {
-        this.resetView(newVal);
+    value:{
+      immediate: true,
+      handler(newVal) {
+        this.resetView(newVal)
       }
     }
   },

@@ -63,8 +63,8 @@
   </div>
 </template>
 <script>
-import months from "../util/months";
 import DateTable from "./DateTable.vue";
+import locale from 'date-fns/locale/en-US'
 
 export default {
   name: "DateTables",
@@ -93,10 +93,10 @@ export default {
   },
   computed: {
     leftLabel() {
-      return months[this.leftMonth] + " " + this.leftYear;
+      return locale.localize.month(this.leftMonth) + " " + this.leftYear;
     },
     rightLabel() {
-      return months[this.rightMonth] + " " + this.rightYear;
+      return locale.localize.month(this.rightMonth) + " " + this.rightYear;
     },
     leftYear() {
       return this.date.getFullYear();
