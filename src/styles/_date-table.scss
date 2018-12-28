@@ -1,6 +1,6 @@
 .date-table {
   width: 100%;
-  min-width: 224px;
+  min-width: 14em;
   font-size: 0.75em;
   table-layout: fixed;
   user-select: none;
@@ -39,7 +39,7 @@
 
     &.today {
       position: relative;
-      color: #20a0ff;
+      color: $primary-color;
 
       &:before {
         position: absolute;
@@ -48,7 +48,7 @@
         width: 0;
         height: 0;
         content: " ";
-        border-top: 0.5em solid #20a0ff;
+        border-top: 0.5em solid $primary-color;
         border-left: 0.5em solid transparent;
       }
     }
@@ -57,7 +57,7 @@
     &.start-date,
     &.end-date {
       color: #fff;
-      background-color: #20a0ff !important;
+      background-color: $primary-color !important;
     }
 
     &.disabled {

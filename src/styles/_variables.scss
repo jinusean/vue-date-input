@@ -3,12 +3,13 @@ $small-only: only screen and
     max-width: 39.938em
   );
 $text-color: #344050;
+$focus-color: lighten($text-color, 20%);
 
 $font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
   Microsoft YaHei, SimSun, sans-serif;
 
-$primary-color: rgba(#15a2ed, 0.6);
-$border-radius: 3px;
+$primary-color: #20a0ff;
+$border-radius: 0.1875em;
 
 $shadow-color: rgba(0, 0, 0, 0.1);
 $box-shadow: 0 5px 10px $shadow-color;

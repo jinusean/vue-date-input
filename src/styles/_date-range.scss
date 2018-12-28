@@ -1,5 +1,5 @@
 .date-range {
-  position: relative;
+  position: absolute;
   z-index: 9998 !important;
   box-sizing: border-box;
   width: 32.5em;
@@ -36,7 +36,7 @@
 
         &.btn-confirm {
           color: white;
-          background: darken($primary-color, 20%);
+          background: $primary-color;
 
           &:hover {
             background: lighten($primary-color, 20%);
@@ -66,37 +66,22 @@
       }
     }
   }
+}
 
-  &:before {
+.date-range:before {
+  position: absolute;
+  top: -1px;
+  width: 100%;
+  height: 1px;
+  content: " ";
+  background: $focus-color;
+}
+
+.date-range-wrapper {
+  position: relative;
+
+  .date-range {
     position: absolute;
-    top: -1px;
-    width: 100%;
-    height: 1px;
-    content: " ";
-    background: $input-color;
-  }
-}
-
-.zoom-in-top-enter-active,
-.zoom-in-top-leave-active {
-  opacity: 1;
-  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms,
-    opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
-  transform: scaleY(1);
-  transform-origin: center top;
-
-  &:before {
-    width: 100%;
-    transition: all cubic-bezier(0.23, 1, 0.32, 1) 300ms;
-  }
-}
-
-.zoom-in-top-enter,
-.zoom-in-top-leave-active {
-  opacity: 0;
-  transform: scaleY(0);
-
-  &:before {
-    width: 0;
+    z-index: 9999;
   }
 }

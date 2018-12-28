@@ -6,26 +6,15 @@
   width: 12em;
   height: 2em;
 
-  > .date-input > input {
+  .date-picker__input {
     padding-left: 2em;
     text-align: left;
   }
 }
 
-.date-picker-open {
-  //&:before {
-  //  position: absolute;
-  //  right: 1px;
-  //  bottom: 1px;
-  //  z-index: 9999;
-  //  display: inline-block;
-  //  width: 99%;
-  //  height: 2px;
-  //  content: "";
-  //  background: white;
-  //
-  //  @media #{$small-only} {
-  //    background: transparent;
-  //  }
-  //}
+.date-picker.date-picker-open {
+  .date-picker__input {
+    color: $focus-color;
+  }
 }
+

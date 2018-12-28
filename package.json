@@ -26,6 +26,7 @@
     "babel-eslint": "^10.0.1",
     "cssnano": "^4.1.8",
     "eslint": "5.10.0",
+    "eslint-config-vue": "2.0.2",
     "eslint-plugin-vue": "5.0.0",
     "node-sass": "^4.11.0",
     "postcss": "^7.0.7",
@@ -44,9 +45,6 @@
   },
   "dependencies": {
     "date-fns": "2.0.0-alpha.26",
-    "element-ui": "^2.4.11",
-    "tabbable": "3.1.1",
-    "vue-date-input": "1.0.2",
-    "vue-popperjs": "1.6.3"
+    "tabbable": "3.1.1"
   }
 }

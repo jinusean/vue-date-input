@@ -1,5 +1,4 @@
 import DatePicker from './components/DatePicker.vue'
-import 'element-ui/lib/theme-chalk/icon.css'
 import './styles/styles.scss'
 
 /* istanbul ignore next */

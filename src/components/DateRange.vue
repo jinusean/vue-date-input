@@ -1,78 +1,70 @@
 <template>
-  <Transition
-    name="zoom-in-top"
-    @after-leave="$emit('dodestroy')"
-  >
-    <div class="date-range">
-      <div
-        v-if="value"
-        class="date-range__content"
-      >
-        <DateInputs
-          ref="dateInputs"
-          :dates="value"
-          :min-date="minDate"
-          :max-date="maxDate"
-          :disabled-date="disabledDate"
-          @pick="onPick"
-        />
+  <div class="date-range">
+    <div class="date-range__content">
+      <DateInputs
+        ref="dateInputs"
+        :dates="dates"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :disabled-date="disabledDate"
+        @pick="onPick"
+      />
 
-        <DateTables
-          :date="date"
-          :min-date="minDate"
-          :max-date="maxDate"
-          :disabled-date="disabledDate"
-          :range-state="rangeState"
-          @date="onDate"
-          @range="onRange"
-          @pick="onPick"
-        />
+      <DateTables
+        :date="date"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :disabled-date="disabledDate"
+        :range-state="rangeState"
+        @date="date = $event"
+        @range="onRange"
+        @pick="onPick"
+      />
 
-        <div class="date-range__footer">
-          <button
-            class="btn-cancel"
-            @click="$emit('close')"
-          >
-            Cancel
-          </button>
-          <button
-            class="btn-confirm"
-            @click="handleConfirm"
-          >
-            Apply
-          </button>
-        </div>
+      <div class="date-range__footer">
+        <button
+          class="btn-cancel"
+          @click="$emit('close')"
+        >
+          Cancel
+        </button>
+        <button
+          class="btn-confirm"
+          @click="handleConfirm"
+        >
+          Apply
+        </button>
       </div>
     </div>
-  </Transition>
+  </div>
 </template>
 
 <script>
-import DateInputs from "./DateInputs.vue";
-import DateTables from "./DateTables.vue";
-
-const calcDefaultValue = defaultValue => {
-  if (Array.isArray(defaultValue)) {
-    return defaultValue[0] ? new Date(defaultValue[0]) : new Date();
-  } else {
-    return new Date(defaultValue);
-  }
-};
+import DateInputs from './DateInputs.vue'
+import DateTables from './DateTables.vue'
 
 export default {
-  name: "DateRange",
+  name: 'DateRange',
   components: { DateInputs, DateTables },
+  model: {
+    prop: 'dates',
+    event: 'dates'
+  },
   props: {
-    value: {
+    dates: {
       type: Array,
-      default() { return [] }
+      default() {
+        return []
+      }
+    },
+    disabledDate: {
+      type: Function,
+      default: () => false
     }
   },
   data() {
     return {
-      date: this.$options.defaultValue
-        ? calcDefaultValue(this.$options.defaultValue)
-        : new Date(),
+      date: null,
       minDate: null,
       maxDate: null,
       rangeState: {
@@ -80,23 +72,11 @@ export default {
         selecting: false,
         row: null,
         column: null
-      },
-      // value: null,
-      visible: false,
-      disabledDate: () => false
-    };
+      }
+    }
   },
   watch: {
-    visible(visible) {
-      if (!visible) {
-        return;
-      }
-      // Delay to next tick because dateInputs is not yet visible, v-if
-      this.$nextTick(() => {
-        this.$refs.dateInputs.focus();
-      });
-    },
-    value:{
+    dates: {
       immediate: true,
       handler(newVal) {
         this.resetView(newVal)
@@ -105,36 +85,36 @@ export default {
   },
 
   methods: {
-    resetView(newVal = this.value) {
+    resetView(newVal = this.dates) {
       this.minDate = new Date(newVal[0])
       this.maxDate = new Date(newVal[1])
-      if (this.minDate) this.date = new Date(this.minDate);
+      if (this.minDate) {
+        this.date = new Date(this.minDate)
+      }
     },
     onRange(val) {
-      this.minDate = val.minDate;
-      this.maxDate = val.maxDate;
-      this.rangeState = val.rangeState;
+      this.minDate = val.minDate
+      this.maxDate = val.maxDate
+      this.rangeState = val.rangeState
     },
     onPick(val) {
       if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
-        return;
+        return
       }
-      this.maxDate = val.maxDate;
-      this.minDate = val.minDate;
+      this.maxDate = val.maxDate
+      this.minDate = val.minDate
 
       // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
       setTimeout(() => {
-        this.maxDate = val.maxDate;
-        this.minDate = val.minDate;
-      }, 10);
-    },
-    onDate(date) {
-      this.date = date;
+        this.maxDate = val.maxDate
+        this.minDate = val.minDate
+      }, 10)
     },
 
     handleConfirm() {
-      this.$emit("pick", [this.minDate, this.maxDate]);
+      this.$emit('dates', [this.minDate, this.maxDate])
+      this.$emit('close')
     }
   }
-};
+}
 </script>

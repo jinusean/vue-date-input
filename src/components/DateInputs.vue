@@ -68,11 +68,12 @@ export default {
       }
     }
   },
+  mounted() {
+    // Focus input on mount
+    const inputs = ["minDate", "maxDate"];
+    this.$refs[inputs[0]].focus();
+  },
   methods: {
-    focus(index = 0) {
-      const inputs = ["minDate", "maxDate"];
-      this.$refs[inputs[index]].focus();
-    },
     onStart(value) {
       if (this.disabledDate(value) || value > this.end) {
         this.start = new Date(this.dates[0]);

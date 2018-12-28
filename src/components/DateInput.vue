@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import { formatDate, parseDate } from '../util'
+import { formatDate, parseDate } from '../util/index.js'
 
 export default {
   name: 'DateInput',

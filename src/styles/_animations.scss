@@ -1,0 +1,39 @@
+$animation: 300ms ease-out;
+
+.expand-enter-active {
+  animation: $animation expand-right;
+
+  @media #{$small-only} {
+    animation: $animation expand-out;
+  }
+}
+
+.expand-leave-active {
+  animation: $animation expand-right reverse;
+
+  @media #{$small-only} {
+    animation: $animation expand-out reverse;
+  }
+}
+
+@keyframes expand-right {
+  0% {
+    transform: scale(0);
+    transform-origin: top left;
+  }
+
+  100% {
+    transform: scale(1);
+    transform-origin: top left;
+  }
+}
+
+@keyframes expand-out {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

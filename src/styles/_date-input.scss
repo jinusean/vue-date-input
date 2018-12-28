@@ -1,9 +1,8 @@
 .date-input {
   position: relative;
   display: flex;
-  //justify-content: center;
   width: 100%;
-  font-size: 13px;
+  font-size: 0.8125em;
 
   .date-input__icon {
     position: absolute;
@@ -28,8 +27,8 @@
     border-bottom-width: 1px;
 
     &:focus {
-      color: lighten($text-color, 20%);
-      border-color: lighten($text-color, 20%);
+      color: $focus-color;
+      border-color: $focus-color;
       outline: none;
       box-shadow: none;
     }
@@ -37,9 +36,7 @@
 }
 
 .icon-calendar {
-  //font: normal normal normal 14px/1 FontAwesome !important;
   right: initial;
   width: 15px;
   height: 15px;
-  //background-image: url("../assets/calendar-icon.svg");
 }

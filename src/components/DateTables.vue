@@ -5,14 +5,18 @@
         <div class="buttons-wrapper">
           <button
             type="button"
-            class="date-tables__icon-btn el-icon-d-arrow-left"
+            class="date-tables__icon-btn"
             @click="prevYear"
-          />
+          >
+            &laquo;
+          </button>
           <button
             type="button"
-            class="date-tables__icon-btn el-icon-arrow-left"
+            class="date-tables__icon-btn"
             @click="prevMonth"
-          />
+          >
+            &lsaquo;
+          </button>
         </div>
         <div class="date_tables__month">
           {{ leftLabel }}
@@ -38,14 +42,18 @@
         <div class="buttons-wrapper">
           <button
             type="button"
-            class="date-tables__icon-btn el-icon-arrow-right"
+            class="date-tables__icon-btn"
             @click="nextMonth"
-          />
+          >
+            &rsaquo;
+          </button>
           <button
             type="button"
-            class="date-tables__icon-btn el-icon-d-arrow-right"
+            class="date-tables__icon-btn"
             @click="nextYear"
-          />
+          >
+            &raquo;
+          </button>
         </div>
       </div>
       <DateTable
@@ -88,7 +96,7 @@ export default {
     },
     rangeState: {
       type: Object,
-      default: null
+      required: true
     }
   },
   computed: {
